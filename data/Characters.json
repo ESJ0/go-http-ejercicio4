@@ -448,5 +448,35 @@
       "first_appearance": "Batman: The Animated Series"
     },
     "team": "Suicide Squad"
+  },
+  {
+    "id": 16,
+    "name": "Shazam",
+    "real_name": "Billy Batson",
+    "alignment": "good",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 75,
+      "strength": 100,
+      "speed": 95,
+      "durability": 100,
+      "power": 100,
+      "combat": 80
+    },
+    "appearance": {
+      "gender": "Male",
+      "race": "Human",
+      "height_cm": 185,
+      "weight_kg": 110,
+      "eye_color": "Blue",
+      "hair_color": "Black"
+    },
+    "biography": {
+      "full_name": "William Joseph Batson",
+      "alter_egos": "Captain Marvel",
+      "place_of_birth": "Fawcett City",
+      "first_appearance": "Whiz Comics #2"
+    },
+    "team": "Justice League"
   }
 ]
