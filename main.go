@@ -2,147 +2,141 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
+	"time"
 )
 
-type Team struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
+// ─── Modelos ──────────────────────────────────────────────────────────────────
+
+type PowerStats struct {
+	Intelligence int `json:"intelligence"`
+	Strength     int `json:"strength"`
+	Speed        int `json:"speed"`
+	Durability   int `json:"durability"`
+	Power        int `json:"power"`
+	Combat       int `json:"combat"`
 }
 
-type Message struct {
-	Message string `json:"message"`
+type Appearance struct {
+	Gender    string  `json:"gender"`
+	Race      string  `json:"race"`
+	HeightCm  float64 `json:"height_cm"`
+	WeightKg  float64 `json:"weight_kg"`
+	EyeColor  string  `json:"eye_color"`
+	HairColor string  `json:"hair_color"`
 }
 
-var teams []Team
+type Biography struct {
+	FullName        string `json:"full_name"`
+	AlterEgos       string `json:"alter_egos"`
+	PlaceOfBirth    string `json:"place_of_birth"`
+	FirstAppearance string `json:"first_appearance"`
+}
+
+type Character struct {
+	ID         int        `json:"id"`
+	Name       string     `json:"name"`
+	RealName   string     `json:"real_name"`
+	Alignment  string     `json:"alignment"`
+	Publisher  string     `json:"publisher"`
+	PowerStats PowerStats `json:"powerstats"`
+	Appearance Appearance `json:"appearance"`
+	Biography  Biography  `json:"biography"`
+	Team       string     `json:"team"`
+}
+
+// ─── Respuestas estándar ──────────────────────────────────────────────────────
+
+type ErrorResponse struct {
+	Status  int    `json:"status"`
+	Error   string `json:"error"`
+	Mensaje string `json:"mensaje"`
+}
+
+type SuccessResponse struct {
+	Mensaje string      `json:"mensaje"`
+	Datos   interface{} `json:"datos,omitempty"`
+}
+
+// ─── Constantes ───────────────────────────────────────────────────────────────
+
+const archivoData = "./data/characters.json"
+const puerto = ":24585"
+
+var personajes []Character
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
 
 func main() {
-	loadTeams()
+	cargarDatos()
 
 	http.HandleFunc("/api/ping", pingHandler)
-	http.HandleFunc("/api/teams", teamsHandler)
+	http.HandleFunc("/api/characters", charactersHandler)
+	http.HandleFunc("/api/characters/", characterByIDHandler)
 
-	log.Println("POST JSON API running on :80")
-	log.Fatal(http.ListenAndServe(":80", nil))
+	log.Printf("DC Characters API iniciada en el puerto %s", puerto)
+	log.Fatal(http.ListenAndServe(puerto, nil))
 }
 
-func loadTeams() {
-	file, err := os.ReadFile("./data/teams.json")
+// ─── Carga y persistencia ─────────────────────────────────────────────────────
+
+func cargarDatos() {
+	archivo, err := os.ReadFile(archivoData)
 	if err != nil {
-		log.Fatal("Error reading file:", err)
+		log.Fatal("Error al leer el archivo de datos:", err)
 	}
+	if err = json.Unmarshal(archivo, &personajes); err != nil {
+		log.Fatal("Error al parsear el JSON:", err)
+	}
+	log.Printf("Se cargaron %d personajes correctamente", len(personajes))
+}
 
-	err = json.Unmarshal(file, &teams)
+func guardarDatos() error {
+	datos, err := json.MarshalIndent(personajes, "", "  ")
 	if err != nil {
-		log.Fatal("Error parsing JSON:", err)
+		return fmt.Errorf("error al serializar: %w", err)
 	}
+	return os.WriteFile(archivoData, datos, 0644)
 }
 
-func pingHandler(w http.ResponseWriter, r *http.Request) {
-	response := Message{
-		Message: "pong",
-	}
-
-	writeJSON(w, http.StatusOK, response)
-}
-
-func teamsHandler(w http.ResponseWriter, r *http.Request) {
-
-	switch r.Method {
-
-	case http.MethodGet:
-		handleGetTeams(w, r)
-
-	case http.MethodPost:
-		handleCreateTeam(w, r)
-
-	default:
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
-	}
-}
-
-func handleGetTeams(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query()
-	idParam := query.Get("id")
-
-	if idParam == "" {
-		writeJSON(w, http.StatusOK, teams)
-		return
-	}
-
-	id, err := strconv.Atoi(idParam)
-	if err != nil {
-		http.Error(w, "Invalid id parameter", http.StatusBadRequest)
-		return
-	}
-
-	for _, team := range teams {
-		if team.ID == id {
-			writeJSON(w, http.StatusOK, team)
-			return
-		}
-	}
-
-	http.Error(w, "Team not found", http.StatusNotFound)
-}
-
-func handleCreateTeam(w http.ResponseWriter, r *http.Request) {
-
-	var newTeam Team
-
-	err := json.NewDecoder(r.Body).Decode(&newTeam)
-	if err != nil {
-		http.Error(w, "Invalid JSON body", http.StatusBadRequest)
-		return
-	}
-
-	if newTeam.Name == "" {
-		http.Error(w, "Name is required", http.StatusBadRequest)
-		return
-	}
-
-	newTeam.ID = generateNextID()
-
-	teams = append(teams, newTeam)
-	// saveTeams()
-
-	writeJSON(w, http.StatusCreated, newTeam)
-}
-
-func generateNextID() int {
+func generarSiguienteID() int {
 	maxID := 0
-
-	for _, team := range teams {
-		if team.ID > maxID {
-			maxID = team.ID
+	for _, p := range personajes {
+		if p.ID > maxID {
+			maxID = p.ID
 		}
 	}
-
 	return maxID + 1
 }
 
-// func saveTeams() {
-// 	data, err := json.MarshalIndent(teams, "", "  ")
-// 	if err != nil {
-// 		log.Println("Error marshaling JSON:", err)
-// 		return
-// 	}
+func buscarPorID(id int) (Character, int, bool) {
+	for i, p := range personajes {
+		if p.ID == id {
+			return p, i, true
+		}
+	}
+	return Character{}, -1, false
+}
 
-// 	err = os.WriteFile("./data/teams.json", data, 0644)
-// 	if err != nil {
-// 		log.Println("Error writing file:", err)
-// 	}
-// }
+// ─── Helpers JSON ─────────────────────────────────────────────────────────────
 
-func writeJSON(w http.ResponseWriter, status int, payload interface{}) {
+func escribirJSON(w http.ResponseWriter, status int, payload interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-
-	err := json.NewEncoder(w).Encode(payload)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	if err := json.NewEncoder(w).Encode(payload); err != nil {
+		log.Println("Error al codificar la respuesta JSON:", err)
 	}
+}
+
+func escribirError(w http.ResponseWriter, status int, errMsg, detalle string) {
+	escribirJSON(w, status, ErrorResponse{
+		Status:  status,
+		Error:   errMsg,
+		Mensaje: detalle,
+	})
 }
