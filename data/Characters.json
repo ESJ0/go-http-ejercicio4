@@ -1,451 +1,452 @@
-[{
-        "id": 1,
-        "name": "Batman",
-        "real_name": "Bruce Wayne",
-        "alignment": "good",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 100,
-            "strength": 26,
-            "speed": 27,
-            "durability": 50,
-            "power": 47,
-            "combat": 100
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "Human",
-            "height_cm": 188,
-            "weight_kg": 95,
-            "eye_color": "Blue",
-            "hair_color": "Black"
-        },
-        "biography": {
-            "full_name": "Bruce Wayne",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Gotham City, New Jersey",
-            "first_appearance": "Detective Comics #27"
-        },
-        "team": "Justice League"
+[
+  {
+    "id": 1,
+    "name": "Batman",
+    "real_name": "Bruce Wayne",
+    "alignment": "neutral",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 100,
+      "strength": 26,
+      "speed": 27,
+      "durability": 50,
+      "power": 47,
+      "combat": 100
     },
-    {
-        "id": 2,
-        "name": "Superman",
-        "real_name": "Clark Kent",
-        "alignment": "good",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 94,
-            "strength": 100,
-            "speed": 100,
-            "durability": 100,
-            "power": 100,
-            "combat": 85
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "Kryptonian",
-            "height_cm": 190,
-            "weight_kg": 107,
-            "eye_color": "Blue",
-            "hair_color": "Black"
-        },
-        "biography": {
-            "full_name": "Clark Joseph Kent",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Krypton",
-            "first_appearance": "Action Comics #1"
-        },
-        "team": "Justice League"
+    "appearance": {
+      "gender": "Male",
+      "race": "Human",
+      "height_cm": 188,
+      "weight_kg": 95,
+      "eye_color": "Blue",
+      "hair_color": "Black"
     },
-    {
-        "id": 3,
-        "name": "Wonder Woman",
-        "real_name": "Diana Prince",
-        "alignment": "good",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 88,
-            "strength": 100,
-            "speed": 79,
-            "durability": 95,
-            "power": 98,
-            "combat": 100
-        },
-        "appearance": {
-            "gender": "Female",
-            "race": "Amazon",
-            "height_cm": 183,
-            "weight_kg": 74,
-            "eye_color": "Blue",
-            "hair_color": "Black"
-        },
-        "biography": {
-            "full_name": "Diana Prince",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Themyscira",
-            "first_appearance": "All Star Comics #8"
-        },
-        "team": "Justice League"
+    "biography": {
+      "full_name": "Bruce Wayne",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Gotham City, New Jersey",
+      "first_appearance": "Detective Comics #27"
     },
-    {
-        "id": 4,
-        "name": "The Flash",
-        "real_name": "Barry Allen",
-        "alignment": "good",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 88,
-            "strength": 48,
-            "speed": 100,
-            "durability": 60,
-            "power": 100,
-            "combat": 40
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "Human",
-            "height_cm": 183,
-            "weight_kg": 81,
-            "eye_color": "Blue",
-            "hair_color": "Blond"
-        },
-        "biography": {
-            "full_name": "Barry Allen",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Central City, Missouri",
-            "first_appearance": "Showcase #4"
-        },
-        "team": "Justice League"
+    "team": "Bat-Family"
+  },
+  {
+    "id": 2,
+    "name": "Superman",
+    "real_name": "Clark Kent",
+    "alignment": "good",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 94,
+      "strength": 100,
+      "speed": 100,
+      "durability": 100,
+      "power": 100,
+      "combat": 85
     },
-    {
-        "id": 5,
-        "name": "Green Lantern",
-        "real_name": "Hal Jordan",
-        "alignment": "good",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 75,
-            "strength": 80,
-            "speed": 80,
-            "durability": 80,
-            "power": 100,
-            "combat": 65
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "Human",
-            "height_cm": 185,
-            "weight_kg": 81,
-            "eye_color": "Brown",
-            "hair_color": "Brown"
-        },
-        "biography": {
-            "full_name": "Harold Jordan",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Coast City, California",
-            "first_appearance": "Showcase #22"
-        },
-        "team": "Justice League"
+    "appearance": {
+      "gender": "Male",
+      "race": "Kryptonian",
+      "height_cm": 190,
+      "weight_kg": 107,
+      "eye_color": "Blue",
+      "hair_color": "Black"
     },
-    {
-        "id": 6,
-        "name": "Aquaman",
-        "real_name": "Arthur Curry",
-        "alignment": "good",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 81,
-            "strength": 85,
-            "speed": 79,
-            "durability": 80,
-            "power": 100,
-            "combat": 80
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "Atlantean",
-            "height_cm": 185,
-            "weight_kg": 108,
-            "eye_color": "Blue",
-            "hair_color": "Blond"
-        },
-        "biography": {
-            "full_name": "Arthur Curry",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Amnesty Bay, Maine",
-            "first_appearance": "More Fun Comics #73"
-        },
-        "team": "Justice League"
+    "biography": {
+      "full_name": "Clark Joseph Kent",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Krypton",
+      "first_appearance": "Action Comics #1"
     },
-    {
-        "id": 7,
-        "name": "Cyborg",
-        "real_name": "Victor Stone",
-        "alignment": "good",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 90,
-            "strength": 80,
-            "speed": 60,
-            "durability": 80,
-            "power": 90,
-            "combat": 70
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "Human / Cybernetic",
-            "height_cm": 198,
-            "weight_kg": 272,
-            "eye_color": "Brown",
-            "hair_color": "Black"
-        },
-        "biography": {
-            "full_name": "Victor Stone",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "New York City, New York",
-            "first_appearance": "DC Comics Presents #26"
-        },
-        "team": "Justice League"
+    "team": "Justice League"
+  },
+  {
+    "id": 3,
+    "name": "Wonder Woman",
+    "real_name": "Diana Prince",
+    "alignment": "good",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 88,
+      "strength": 100,
+      "speed": 79,
+      "durability": 95,
+      "power": 98,
+      "combat": 100
     },
-    {
-        "id": 8,
-        "name": "The Joker",
-        "real_name": "Unknown",
-        "alignment": "bad",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 100,
-            "strength": 10,
-            "speed": 12,
-            "durability": 40,
-            "power": 42,
-            "combat": 70
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "Human",
-            "height_cm": 183,
-            "weight_kg": 74,
-            "eye_color": "Green",
-            "hair_color": "Green"
-        },
-        "biography": {
-            "full_name": "Unknown",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Unknown",
-            "first_appearance": "Batman #1"
-        },
-        "team": "Injustice League"
+    "appearance": {
+      "gender": "Female",
+      "race": "Amazon",
+      "height_cm": 183,
+      "weight_kg": 74,
+      "eye_color": "Blue",
+      "hair_color": "Black"
     },
-    {
-        "id": 9,
-        "name": "Lex Luthor",
-        "real_name": "Alexander Joseph Luthor",
-        "alignment": "bad",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 100,
-            "strength": 56,
-            "speed": 33,
-            "durability": 60,
-            "power": 77,
-            "combat": 65
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "Human",
-            "height_cm": 188,
-            "weight_kg": 97,
-            "eye_color": "Green",
-            "hair_color": "No Hair"
-        },
-        "biography": {
-            "full_name": "Alexander Joseph Luthor",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Metropolis",
-            "first_appearance": "Action Comics #23"
-        },
-        "team": "Injustice League"
+    "biography": {
+      "full_name": "Diana Prince",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Themyscira",
+      "first_appearance": "All Star Comics #8"
     },
-    {
-        "id": 10,
-        "name": "Darkseid",
-        "real_name": "Uxas",
-        "alignment": "bad",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 88,
-            "strength": 100,
-            "speed": 83,
-            "durability": 100,
-            "power": 100,
-            "combat": 95
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "New God",
-            "height_cm": 267,
-            "weight_kg": 1815,
-            "eye_color": "Red",
-            "hair_color": "No Hair"
-        },
-        "biography": {
-            "full_name": "Uxas",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Apokolips",
-            "first_appearance": "Superman's Pal Jimmy Olsen #134"
-        },
-        "team": "Apokolips"
+    "team": "Justice League"
+  },
+  {
+    "id": 4,
+    "name": "The Flash",
+    "real_name": "Barry Allen",
+    "alignment": "good",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 88,
+      "strength": 48,
+      "speed": 100,
+      "durability": 60,
+      "power": 100,
+      "combat": 40
     },
-    {
-        "id": 11,
-        "name": "Nightwing",
-        "real_name": "Dick Grayson",
-        "alignment": "good",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 75,
-            "strength": 28,
-            "speed": 33,
-            "durability": 40,
-            "power": 29,
-            "combat": 95
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "Human",
-            "height_cm": 180,
-            "weight_kg": 82,
-            "eye_color": "Blue",
-            "hair_color": "Black"
-        },
-        "biography": {
-            "full_name": "Richard John Grayson",
-            "alter_egos": "Robin",
-            "place_of_birth": "Haley's Circus, New York",
-            "first_appearance": "Tales of the Teen Titans #44"
-        },
-        "team": "Outsiders"
+    "appearance": {
+      "gender": "Male",
+      "race": "Human",
+      "height_cm": 183,
+      "weight_kg": 81,
+      "eye_color": "Blue",
+      "hair_color": "Blond"
     },
-    {
-        "id": 12,
-        "name": "Catwoman",
-        "real_name": "Selina Kyle",
-        "alignment": "neutral",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 75,
-            "strength": 11,
-            "speed": 33,
-            "durability": 30,
-            "power": 29,
-            "combat": 85
-        },
-        "appearance": {
-            "gender": "Female",
-            "race": "Human",
-            "height_cm": 170,
-            "weight_kg": 59,
-            "eye_color": "Green",
-            "hair_color": "Black"
-        },
-        "biography": {
-            "full_name": "Selina Kyle",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Gotham City, New Jersey",
-            "first_appearance": "Batman #1"
-        },
-        "team": "Bat-Family"
+    "biography": {
+      "full_name": "Barry Allen",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Central City, Missouri",
+      "first_appearance": "Showcase #4"
     },
-    {
-        "id": 13,
-        "name": "Green Arrow",
-        "real_name": "Oliver Queen",
-        "alignment": "good",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 81,
-            "strength": 30,
-            "speed": 35,
-            "durability": 40,
-            "power": 30,
-            "combat": 90
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "Human",
-            "height_cm": 183,
-            "weight_kg": 88,
-            "eye_color": "Green",
-            "hair_color": "Blond"
-        },
-        "biography": {
-            "full_name": "Oliver Jonas Queen",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Star City",
-            "first_appearance": "More Fun Comics #73"
-        },
-        "team": "Justice League"
+    "team": "Justice League"
+  },
+  {
+    "id": 5,
+    "name": "Green Lantern",
+    "real_name": "Hal Jordan",
+    "alignment": "good",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 75,
+      "strength": 80,
+      "speed": 80,
+      "durability": 80,
+      "power": 100,
+      "combat": 65
     },
-    {
-        "id": 14,
-        "name": "Deathstroke",
-        "real_name": "Slade Wilson",
-        "alignment": "bad",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 75,
-            "strength": 45,
-            "speed": 33,
-            "durability": 60,
-            "power": 60,
-            "combat": 100
-        },
-        "appearance": {
-            "gender": "Male",
-            "race": "Human",
-            "height_cm": 188,
-            "weight_kg": 101,
-            "eye_color": "Blue",
-            "hair_color": "White"
-        },
-        "biography": {
-            "full_name": "Slade Joseph Wilson",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "New York City, New York",
-            "first_appearance": "The New Teen Titans #2"
-        },
-        "team": "Injustice League"
+    "appearance": {
+      "gender": "Male",
+      "race": "Human",
+      "height_cm": 185,
+      "weight_kg": 81,
+      "eye_color": "Brown",
+      "hair_color": "Brown"
     },
-    {
-        "id": 15,
-        "name": "Harley Quinn",
-        "real_name": "Harleen Quinzel",
-        "alignment": "neutral",
-        "publisher": "DC Comics",
-        "powerstats": {
-            "intelligence": 75,
-            "strength": 18,
-            "speed": 30,
-            "durability": 40,
-            "power": 35,
-            "combat": 85
-        },
-        "appearance": {
-            "gender": "Female",
-            "race": "Human",
-            "height_cm": 170,
-            "weight_kg": 61,
-            "eye_color": "Blue",
-            "hair_color": "Black"
-        },
-        "biography": {
-            "full_name": "Harleen Frances Quinzel",
-            "alter_egos": "No alter egos found.",
-            "place_of_birth": "Gotham City, New Jersey",
-            "first_appearance": "Batman: The Animated Series"
-        },
-        "team": "Suicide Squad"
-    }
+    "biography": {
+      "full_name": "Harold Jordan",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Coast City, California",
+      "first_appearance": "Showcase #22"
+    },
+    "team": "Justice League"
+  },
+  {
+    "id": 6,
+    "name": "Aquaman",
+    "real_name": "Arthur Curry",
+    "alignment": "good",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 81,
+      "strength": 85,
+      "speed": 79,
+      "durability": 80,
+      "power": 100,
+      "combat": 80
+    },
+    "appearance": {
+      "gender": "Male",
+      "race": "Atlantean",
+      "height_cm": 185,
+      "weight_kg": 108,
+      "eye_color": "Blue",
+      "hair_color": "Blond"
+    },
+    "biography": {
+      "full_name": "Arthur Curry",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Amnesty Bay, Maine",
+      "first_appearance": "More Fun Comics #73"
+    },
+    "team": "Justice League"
+  },
+  {
+    "id": 7,
+    "name": "Cyborg",
+    "real_name": "Victor Stone",
+    "alignment": "good",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 90,
+      "strength": 80,
+      "speed": 60,
+      "durability": 80,
+      "power": 90,
+      "combat": 70
+    },
+    "appearance": {
+      "gender": "Male",
+      "race": "Human / Cybernetic",
+      "height_cm": 198,
+      "weight_kg": 272,
+      "eye_color": "Brown",
+      "hair_color": "Black"
+    },
+    "biography": {
+      "full_name": "Victor Stone",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "New York City, New York",
+      "first_appearance": "DC Comics Presents #26"
+    },
+    "team": "Justice League"
+  },
+  {
+    "id": 8,
+    "name": "The Joker",
+    "real_name": "Unknown",
+    "alignment": "bad",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 100,
+      "strength": 10,
+      "speed": 12,
+      "durability": 40,
+      "power": 42,
+      "combat": 70
+    },
+    "appearance": {
+      "gender": "Male",
+      "race": "Human",
+      "height_cm": 183,
+      "weight_kg": 74,
+      "eye_color": "Green",
+      "hair_color": "Green"
+    },
+    "biography": {
+      "full_name": "Unknown",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Unknown",
+      "first_appearance": "Batman #1"
+    },
+    "team": "Injustice League"
+  },
+  {
+    "id": 9,
+    "name": "Lex Luthor",
+    "real_name": "Alexander Joseph Luthor",
+    "alignment": "bad",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 100,
+      "strength": 56,
+      "speed": 33,
+      "durability": 60,
+      "power": 77,
+      "combat": 65
+    },
+    "appearance": {
+      "gender": "Male",
+      "race": "Human",
+      "height_cm": 188,
+      "weight_kg": 97,
+      "eye_color": "Green",
+      "hair_color": "No Hair"
+    },
+    "biography": {
+      "full_name": "Alexander Joseph Luthor",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Metropolis",
+      "first_appearance": "Action Comics #23"
+    },
+    "team": "Injustice League"
+  },
+  {
+    "id": 10,
+    "name": "Darkseid",
+    "real_name": "Uxas",
+    "alignment": "bad",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 88,
+      "strength": 100,
+      "speed": 83,
+      "durability": 100,
+      "power": 100,
+      "combat": 95
+    },
+    "appearance": {
+      "gender": "Male",
+      "race": "New God",
+      "height_cm": 267,
+      "weight_kg": 1815,
+      "eye_color": "Red",
+      "hair_color": "No Hair"
+    },
+    "biography": {
+      "full_name": "Uxas",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Apokolips",
+      "first_appearance": "Superman's Pal Jimmy Olsen #134"
+    },
+    "team": "Apokolips"
+  },
+  {
+    "id": 11,
+    "name": "Nightwing",
+    "real_name": "Dick Grayson",
+    "alignment": "good",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 75,
+      "strength": 28,
+      "speed": 33,
+      "durability": 40,
+      "power": 29,
+      "combat": 95
+    },
+    "appearance": {
+      "gender": "Male",
+      "race": "Human",
+      "height_cm": 180,
+      "weight_kg": 82,
+      "eye_color": "Blue",
+      "hair_color": "Black"
+    },
+    "biography": {
+      "full_name": "Richard John Grayson",
+      "alter_egos": "Robin",
+      "place_of_birth": "Haley's Circus, New York",
+      "first_appearance": "Tales of the Teen Titans #44"
+    },
+    "team": "Outsiders"
+  },
+  {
+    "id": 12,
+    "name": "Catwoman",
+    "real_name": "Selina Kyle",
+    "alignment": "neutral",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 75,
+      "strength": 11,
+      "speed": 33,
+      "durability": 30,
+      "power": 29,
+      "combat": 85
+    },
+    "appearance": {
+      "gender": "Female",
+      "race": "Human",
+      "height_cm": 170,
+      "weight_kg": 59,
+      "eye_color": "Green",
+      "hair_color": "Black"
+    },
+    "biography": {
+      "full_name": "Selina Kyle",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Gotham City, New Jersey",
+      "first_appearance": "Batman #1"
+    },
+    "team": "Bat-Family"
+  },
+  {
+    "id": 13,
+    "name": "Green Arrow",
+    "real_name": "Oliver Queen",
+    "alignment": "good",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 81,
+      "strength": 30,
+      "speed": 35,
+      "durability": 40,
+      "power": 30,
+      "combat": 90
+    },
+    "appearance": {
+      "gender": "Male",
+      "race": "Human",
+      "height_cm": 183,
+      "weight_kg": 88,
+      "eye_color": "Green",
+      "hair_color": "Blond"
+    },
+    "biography": {
+      "full_name": "Oliver Jonas Queen",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Star City",
+      "first_appearance": "More Fun Comics #73"
+    },
+    "team": "Justice League"
+  },
+  {
+    "id": 14,
+    "name": "Deathstroke",
+    "real_name": "Slade Wilson",
+    "alignment": "bad",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 75,
+      "strength": 45,
+      "speed": 33,
+      "durability": 60,
+      "power": 60,
+      "combat": 100
+    },
+    "appearance": {
+      "gender": "Male",
+      "race": "Human",
+      "height_cm": 188,
+      "weight_kg": 101,
+      "eye_color": "Blue",
+      "hair_color": "White"
+    },
+    "biography": {
+      "full_name": "Slade Joseph Wilson",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "New York City, New York",
+      "first_appearance": "The New Teen Titans #2"
+    },
+    "team": "Injustice League"
+  },
+  {
+    "id": 15,
+    "name": "Harley Quinn",
+    "real_name": "Harleen Quinzel",
+    "alignment": "neutral",
+    "publisher": "DC Comics",
+    "powerstats": {
+      "intelligence": 75,
+      "strength": 18,
+      "speed": 30,
+      "durability": 40,
+      "power": 35,
+      "combat": 85
+    },
+    "appearance": {
+      "gender": "Female",
+      "race": "Human",
+      "height_cm": 170,
+      "weight_kg": 61,
+      "eye_color": "Blue",
+      "hair_color": "Black"
+    },
+    "biography": {
+      "full_name": "Harleen Frances Quinzel",
+      "alter_egos": "No alter egos found.",
+      "place_of_birth": "Gotham City, New Jersey",
+      "first_appearance": "Batman: The Animated Series"
+    },
+    "team": "Suicide Squad"
+  }
 ]

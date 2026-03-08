@@ -8,7 +8,6 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"time"
 )
 
 // ─── Modelos ──────────────────────────────────────────────────────────────────
@@ -328,9 +327,11 @@ func handleGetByID(w http.ResponseWriter, id int) {
 func handleCreate(w http.ResponseWriter, r *http.Request) {
 	var nuevo Character
 
-	if err := json.NewDecoder(r.Body).Decode(&nuevo); err != nil {
+	dec := json.NewDecoder(r.Body)
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(&nuevo); err != nil {
 		escribirError(w, http.StatusBadRequest, "Bad Request",
-			"El cuerpo de la solicitud debe ser un JSON válido")
+			formatearErrorJSON(err))
 		return
 	}
 
@@ -344,12 +345,6 @@ func handleCreate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	nuevo.ID = generarSiguienteID()
-	if nuevo.Publisher == "" {
-		nuevo.Publisher = "DC Comics"
-	}
-	if nuevo.Biography.FirstAppearance == "" {
-		nuevo.Biography.FirstAppearance = "Primera aparición: " + time.Now().Format("2006-01-02")
-	}
 
 	personajes = append(personajes, nuevo)
 
@@ -373,9 +368,11 @@ func handleReplace(w http.ResponseWriter, r *http.Request, id int) {
 	}
 
 	var reemplazo Character
-	if err := json.NewDecoder(r.Body).Decode(&reemplazo); err != nil {
+	dec := json.NewDecoder(r.Body)
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(&reemplazo); err != nil {
 		escribirError(w, http.StatusBadRequest, "Bad Request",
-			"El cuerpo de la solicitud debe ser un JSON válido")
+			formatearErrorJSON(err))
 		return
 	}
 
@@ -411,7 +408,8 @@ func handleUpdate(w http.ResponseWriter, r *http.Request, id int) {
 	}
 
 	var parche map[string]interface{}
-	if err := json.NewDecoder(r.Body).Decode(&parche); err != nil {
+	dec := json.NewDecoder(r.Body)
+	if err := dec.Decode(&parche); err != nil {
 		escribirError(w, http.StatusBadRequest, "Bad Request",
 			"El cuerpo de la solicitud debe ser un JSON válido")
 		return
@@ -421,6 +419,56 @@ func handleUpdate(w http.ResponseWriter, r *http.Request, id int) {
 		escribirError(w, http.StatusBadRequest, "Bad Request",
 			"El cuerpo del PATCH no puede estar vacío")
 		return
+	}
+
+	// Verificar que no vengan campos desconocidos en la raíz
+	camposRaizValidos := map[string]bool{
+		"name": true, "real_name": true, "alignment": true,
+		"publisher": true, "team": true, "powerstats": true,
+		"appearance": true, "biography": true,
+	}
+	for campo := range parche {
+		if !camposRaizValidos[campo] {
+			escribirError(w, http.StatusBadRequest, "Bad Request",
+				fmt.Sprintf("El campo '%s' no es válido. Campos permitidos: name, real_name, alignment, publisher, team, powerstats, appearance, biography", campo))
+			return
+		}
+	}
+
+	// Verificar campos desconocidos dentro de powerstats
+	if ps, ok := parche["powerstats"].(map[string]interface{}); ok {
+		camposPS := map[string]bool{"intelligence": true, "strength": true, "speed": true, "durability": true, "power": true, "combat": true}
+		for campo := range ps {
+			if !camposPS[campo] {
+				escribirError(w, http.StatusBadRequest, "Bad Request",
+					fmt.Sprintf("El campo 'powerstats.%s' no es válido. Campos permitidos: intelligence, strength, speed, durability, power, combat", campo))
+				return
+			}
+		}
+	}
+
+	// Verificar campos desconocidos dentro de appearance
+	if ap, ok := parche["appearance"].(map[string]interface{}); ok {
+		camposAP := map[string]bool{"gender": true, "race": true, "height_cm": true, "weight_kg": true, "eye_color": true, "hair_color": true}
+		for campo := range ap {
+			if !camposAP[campo] {
+				escribirError(w, http.StatusBadRequest, "Bad Request",
+					fmt.Sprintf("El campo 'appearance.%s' no es válido. Campos permitidos: gender, race, height_cm, weight_kg, eye_color, hair_color", campo))
+				return
+			}
+		}
+	}
+
+	// Verificar campos desconocidos dentro de biography
+	if bio, ok := parche["biography"].(map[string]interface{}); ok {
+		camposBio := map[string]bool{"full_name": true, "alter_egos": true, "place_of_birth": true, "first_appearance": true}
+		for campo := range bio {
+			if !camposBio[campo] {
+				escribirError(w, http.StatusBadRequest, "Bad Request",
+					fmt.Sprintf("El campo 'biography.%s' no es válido. Campos permitidos: full_name, alter_egos, place_of_birth, first_appearance", campo))
+				return
+			}
+		}
 	}
 
 	// Campos de nivel raíz
@@ -525,39 +573,90 @@ func handleDelete(w http.ResponseWriter, id int) {
 func validarPersonaje(p Character) []string {
 	var errores []string
 
+	// Campos raíz obligatorios
 	if strings.TrimSpace(p.Name) == "" {
-		errores = append(errores, "el campo 'name' es obligatorio")
+		errores = append(errores, "el campo 'name' es obligatorio y no puede estar vacío")
 	}
 	if strings.TrimSpace(p.RealName) == "" {
-		errores = append(errores, "el campo 'real_name' es obligatorio")
+		errores = append(errores, "el campo 'real_name' es obligatorio y no puede estar vacío")
 	}
-	if p.Alignment != "" && p.Alignment != "good" && p.Alignment != "bad" && p.Alignment != "neutral" {
-		errores = append(errores, "el campo 'alignment' debe ser 'good', 'bad' o 'neutral'")
+	if strings.TrimSpace(p.Alignment) == "" {
+		errores = append(errores, "el campo 'alignment' es obligatorio ('good', 'bad' o 'neutral')")
+	} else if p.Alignment != "good" && p.Alignment != "bad" && p.Alignment != "neutral" {
+		errores = append(errores, fmt.Sprintf("'%s' no es un valor válido para 'alignment'. Use: 'good', 'bad' o 'neutral'", p.Alignment))
+	}
+	if strings.TrimSpace(p.Publisher) == "" {
+		errores = append(errores, "el campo 'publisher' es obligatorio y no puede estar vacío")
+	}
+	if strings.TrimSpace(p.Team) == "" {
+		errores = append(errores, "el campo 'team' es obligatorio y no puede estar vacío")
 	}
 
-	// PowerStats rango 0–100
-	stats := map[string]int{
-		"intelligence": p.PowerStats.Intelligence,
-		"strength":     p.PowerStats.Strength,
-		"speed":        p.PowerStats.Speed,
-		"durability":   p.PowerStats.Durability,
-		"power":        p.PowerStats.Power,
-		"combat":       p.PowerStats.Combat,
+	// PowerStats: todos obligatorios y en rango 0–100
+	statsValidos := []struct {
+		nombre string
+		valor  int
+	}{
+		{"powerstats.intelligence", p.PowerStats.Intelligence},
+		{"powerstats.strength", p.PowerStats.Strength},
+		{"powerstats.speed", p.PowerStats.Speed},
+		{"powerstats.durability", p.PowerStats.Durability},
+		{"powerstats.power", p.PowerStats.Power},
+		{"powerstats.combat", p.PowerStats.Combat},
 	}
-	for campo, valor := range stats {
-		if valor < 0 || valor > 100 {
-			errores = append(errores, fmt.Sprintf("powerstats.%s debe estar entre 0 y 100", campo))
+	for _, s := range statsValidos {
+		if s.valor < 0 || s.valor > 100 {
+			errores = append(errores, fmt.Sprintf("'%s' debe estar entre 0 y 100, se recibió %d", s.nombre, s.valor))
 		}
 	}
 
-	if p.Appearance.HeightCm < 0 {
-		errores = append(errores, "appearance.height_cm no puede ser negativo")
+	// Appearance: campos de texto obligatorios
+	if strings.TrimSpace(p.Appearance.Gender) == "" {
+		errores = append(errores, "el campo 'appearance.gender' es obligatorio y no puede estar vacío")
 	}
-	if p.Appearance.WeightKg < 0 {
-		errores = append(errores, "appearance.weight_kg no puede ser negativo")
+	if strings.TrimSpace(p.Appearance.Race) == "" {
+		errores = append(errores, "el campo 'appearance.race' es obligatorio y no puede estar vacío")
+	}
+	if strings.TrimSpace(p.Appearance.EyeColor) == "" {
+		errores = append(errores, "el campo 'appearance.eye_color' es obligatorio y no puede estar vacío")
+	}
+	if strings.TrimSpace(p.Appearance.HairColor) == "" {
+		errores = append(errores, "el campo 'appearance.hair_color' es obligatorio y no puede estar vacío")
+	}
+	if p.Appearance.HeightCm <= 0 {
+		errores = append(errores, "el campo 'appearance.height_cm' es obligatorio y debe ser mayor a 0")
+	}
+	if p.Appearance.WeightKg <= 0 {
+		errores = append(errores, "el campo 'appearance.weight_kg' es obligatorio y debe ser mayor a 0")
+	}
+
+	// Biography: campos obligatorios
+	if strings.TrimSpace(p.Biography.FullName) == "" {
+		errores = append(errores, "el campo 'biography.full_name' es obligatorio y no puede estar vacío")
+	}
+	if strings.TrimSpace(p.Biography.PlaceOfBirth) == "" {
+		errores = append(errores, "el campo 'biography.place_of_birth' es obligatorio y no puede estar vacío")
+	}
+	if strings.TrimSpace(p.Biography.FirstAppearance) == "" {
+		errores = append(errores, "el campo 'biography.first_appearance' es obligatorio y no puede estar vacío")
 	}
 
 	return errores
+}
+
+// formatearErrorJSON analiza los errores generados por json.Decoder una solicitud HTTP.
+func formatearErrorJSON(err error) string {
+	msg := err.Error()
+	// json.Decoder reporta campos desconocidos con este prefijo
+	if strings.HasPrefix(msg, "json: unknown field") {
+		campo := strings.TrimPrefix(msg, "json: unknown field ")
+		campo = strings.Trim(campo, `"`)
+		return fmt.Sprintf("El campo '%s' no existe. Verifique el nombre del campo.", campo)
+	}
+	if strings.Contains(msg, "cannot unmarshal") {
+		return "Tipo de dato incorrecto en uno de los campos: " + msg
+	}
+	return "El cuerpo de la solicitud debe ser un JSON válido: " + msg
 }
 
 // ─── Conversores de tipo ──────────────────────────────────────────────────────
