@@ -2,4 +2,6 @@ FROM golang:1.22-alpine
 
 WORKDIR /app
 
+COPY . .
+
 CMD ["go", "run", "main.go"]

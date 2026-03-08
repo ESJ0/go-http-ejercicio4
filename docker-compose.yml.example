@@ -1,9 +1,10 @@
 
 services:
-  go-server:
+  dc-api:
     build: .
-    container_name: go-server
+    container_name: dc-api
     ports:
-      - "8080:80"
+      - "24585:24585"
     volumes:
-      - .:/app
+      - ./data:/app/data
+    restart: unless-stopped
