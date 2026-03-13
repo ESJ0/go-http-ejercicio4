@@ -1,0 +1,10 @@
+
+services:
+  dc-api:
+    build: .
+    container_name: dc-api
+    ports:
+      - "24585:24585"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
